@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Silver Lead Project | Independent Care Accountability</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:ital,wght@0,400;0,700;1,300&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Custom Properties mapping to exact palette rules */
+        :root {
+            --primary-navy: #0B1F3A;
+            --silver-accent: #C0C7D1;
+            --muted-blue: #2F5F8F;
+            --off-white: #F7F8FA;
+            --white: #FFFFFF;
+            --charcoal-text: #1F2933;
+            --muted-text: #5B6775;
+            --emergency-red: #B42318;
+            --font-headings: 'Merriweather', Georgia, serif;
+            --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+            --transition: all 0.2s ease-in-out;
+        }
+
+        /* Basic Resets & Document Configuration */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: var(--font-body);
+            color: var(--charcoal-text);
+            background-color: var(--off-white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4 { font-family: var(--font-headings); color: var(--primary-navy); font-weight: 700; }
+        a { text-decoration: none; color: var(--muted-blue); transition: var(--transition); }
+        a:hover { color: var(--primary-navy); }
+
+        /* Structural Layout Utilities */
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .grid { display: grid; gap: 24px; }
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
+        /* System Header / Navigation */
+        header { background-color: var(--primary-navy); border-bottom: 2px solid var(--silver-accent); padding: 20px 0; position: sticky; top: 0; z-index: 1000; }
+        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+        .logo-area { display: flex; align-items: center; gap: 12px; }
+        .logo-icon { width: 32px; height: 32px; border: 2px solid var(--silver-accent); position: relative; border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+        .logo-icon::after { content: ''; width: 12px; height: 12px; background-color: var(--silver-accent); clip-path: polygon(50% 0%, 100% 100%, 0% 100%); transform: rotate(180deg); }
+        .logo-text { color: var(--white); font-family: var(--font-headings); font-weight: 700; font-size: 1.25rem; }
+        nav { display: flex; gap: 24px; align-items: center; }
+        .nav-link { color: var(--silver-accent); font-weight: 500; font-size: 0.95rem; cursor: pointer; }
+        .nav-link:hover, .nav-link.active { color: var(--white); }
+        .btn-nav { background-color: var(--muted-blue); color: var(--white); padding: 8px 16px; border-radius: 4px; font-weight: 500; font-size: 0.9rem; }
+        .btn-nav:hover { background-color: var(--white); color: var(--primary-navy); }
+
+        /* Alerts & Callouts */
+        .emergency-banner { background-color: #FDF2F2; border-left: 4px solid var(--emergency-red); padding: 16px; margin-bottom: 24px; border-radius: 4px; }
+        .emergency-banner p { color: var(--emergency-red); font-weight: 600; display: flex; align-items: center; gap: 8px; font-size: 0.95rem; }
+        .notice-banner { background-color: #EFF6FF; border-left: 4px solid var(--muted-blue); padding: 16px; margin-bottom: 24px; border-radius: 4px; }
+        .notice-banner p { color: var(--primary-navy); font-size: 0.9rem; }
+
+        /* Buttons & Interface Inputs */
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 28px; border-radius: 4px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: var(--transition); border: none; }
+        .btn-primary { background-color: var(--primary-navy); color: var(--white); border: 1px solid var(--primary-navy); }
+        .btn-primary:hover { background-color: var(--white); color: var(--primary-navy); }
+        .btn-secondary { background-color: var(--muted-blue); color: var(--white); }
+        .btn-secondary:hover { background-color: var(--primary-navy); }
+        .btn-white { background-color: var(--white); color: var(--primary-navy); }
+        .btn-white:hover { background-color: var(--silver-accent); }
+        .btn-outline { background-color: transparent; color: var(--white); border: 2px solid var(--silver-accent); }
+        .btn-outline:hover { background-color: var(--white); color: var(--primary-navy); border-color: var(--white); }
+
+        /* Main View Container Handling */
+        .site-view { display: none; padding: 60px 0; }
+        .site-view.active-view { display: block; }
+
+        /* View: Homepage Layout Specifics */
+        #home-view { padding: 0; }
+        .hero { background-color: var(--primary-navy); color: var(--white); padding: 80px 0; text-align: center; border-bottom: 4px solid var(--silver-accent); position: relative; }
+        .hero h1 { color: var(--white); font-size: 3rem; margin-bottom: 24px; max-width: 900px; margin-left: auto; margin-right: auto; line-height: 1.2; }
+        .hero p.subheadline { font-size: 1.2rem; color: var(--silver-accent); max-width: 800px; margin: 0 auto 32px auto; font-family: var(--font-body); }
+        .hero-actions { display: flex; gap: 16px; justify-content: center; margin-bottom: 32px; flex-wrap: wrap; }
+        .hero-tagline { font-family: var(--font-headings); font-style: italic; color: var(--silver-accent); font-size: 1rem; border-top: 1px solid rgba(192, 199, 209, 0.3); display: inline-block; padding-top: 16px; }
+
+        .section-padding { padding: 80px 0; }
+        .bg-white { background-color: var(--white); }
+        .section-header { margin-bottom: 48px; text-align: center; max-width: 750px; margin-left: auto; margin-right: auto; }
+        .section-header h2 { font-size: 2.25rem; margin-bottom: 16px; position: relative; padding-bottom: 12px; }
+        .section-header h2::after { content: ''; width: 60px; height: 3px; background-color: var(--silver-accent); position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); }
+        .section-copy { font-size: 1.1rem; color: var(--charcoal-text); max-width: 800px; margin: 0 auto; text-align: justify; text-justify: inter-word; }
+
+        /* Card Mechanics */
+        .card { background: var(--white); border: 1px solid rgba(192, 199, 209, 0.5); padding: 28px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); transition: var(--transition); }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-color: var(--silver-accent); }
+        .card h3 { font-size: 1.25rem; margin-bottom: 12px; }
+        .card p { font-size: 0.95rem; color: var(--muted-text); }
+        .bg-white .card { background: var(--off-white); }
+
+        /* Timeline Engine */
+        .timeline { position: relative; max-width: 800px; margin: 40px auto 0 auto; padding-left: 32px; border-left: 2px solid var(--silver-accent); }
+        .timeline-step { position: relative; margin-bottom: 40px; }
+        .timeline-step:last-child { margin-bottom: 0; }
+        .timeline-marker { width: 16px; height: 16px; background-color: var(--muted-blue); border: 3px solid var(--white); outline: 2px solid var(--primary-navy); border-radius: 50%; position: absolute; left: -41px; top: 4px; }
+        .timeline-title { font-size: 1.2rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .timeline-desc { font-size: 1rem; color: var(--charcoal-text); }
+
+        /* Specialized Disclaimer Box styles */
+        .disclaimer-box { background-color: var(--off-white); border: 1px solid var(--silver-accent); padding: 20px; border-radius: 4px; font-size: 0.88rem; color: var(--muted-text); margin-top: 32px; }
+
+        /* Form Wizard Mechanics */
+        .form-wizard-container { max-width: 760px; margin: 0 auto; background: var(--white); border: 1px solid var(--silver-accent); border-radius: 6px; padding: 40px; }
+        .form-step { display: none; }
+        .form-step.active-step { display: block; }
+        .progress-indicator { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted-blue); font-weight: 600; margin-bottom: 8px; }
+        .step-heading { font-size: 1.5rem; margin-bottom: 24px; border-bottom: 1px solid var(--silver-accent); padding-bottom: 12px; }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.95rem; }
+        .form-control { width: 100%; padding: 12px; border: 1px solid var(--silver-accent); border-radius: 4px; font-family: var(--font-body); font-size: 1rem; color: var(--charcoal-text); transition: var(--transition); }
+        .form-control:focus { outline: none; border-color: var(--muted-blue); box-shadow: 0 0 0 3px rgba(47, 95, 143, 0.15); }
+        
+        .options-list { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+        .option-item { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; }
+        .option-item input[type="radio"], .option-item input[type="checkbox"] { margin-top: 5px; width: 16px; height: 16px; accent-color: var(--muted-blue); }
+        .option-label { font-size: 0.95rem; color: var(--charcoal-text); }
+
+        .form-actions { display: flex; justify-content: space-between; margin-top: 32px; border-top: 1px solid var(--silver-accent); padding-top: 24px; }
+
+        /* Static Page Simple Rules */
+        .static-page-layout { max-width: 850px; margin: 0 auto; background: var(--white); padding: 48px; border-radius: 6px; border: 1px solid rgba(192, 199, 209, 0.5); }
+        .static-page-layout p { margin-bottom: 20px; font-size: 1.05rem; text-align: justify; }
+        .static-page-layout ul { margin-bottom: 24px; padding-left: 20px; }
+        .static-page-layout li { margin-bottom: 10px; font-size: 1rem; }
+
+        /* System Footer Architecture */
+        footer { background-color: var(--primary-navy); color: var(--white); padding: 60px 0 40px 0; font-size: 0.88rem; border-top: 4px solid var(--silver-accent); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; margin-bottom: 40px; }
+        .footer-about h4 { color: var(--white); margin-bottom: 16px; }
+        .footer-about p { color: var(--silver-accent); max-width: 600px; text-align: justify; }
+        .footer-links h4 { color: var(--white); margin-bottom: 16px; }
+        .footer-nav { display: flex; flex-direction: column; gap: 12px; }
+        .footer-nav a { color: var(--silver-accent); }
+        .footer-nav a:hover { color: var(--white); }
+        .footer-disclaimer { border-top: 1px solid rgba(192, 199, 209, 0.2); padding-top: 24px; color: var(--silver-accent); text-align: justify; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .nav-wrapper { flex-direction: column; gap: 16px; }
+            nav { flex-wrap: wrap; justify-content: center; gap: 16px; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .form-wizard-container { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <div class="logo-area">
+                <div class="logo-icon"></div>
+                <div class="logo-text">The Silver Lead Project</div>
+            </div>
+            <nav>
+                <span class="nav-link active" onclick="app.switchView('home')">Home</span>
+                <span class="nav-link" onclick="app.switchView('review')">What We Review</span>
+                <span class="nav-link" onclick="app.switchView('works')">How It Works</span>
+                <span class="nav-link" onclick="app.switchView('approach')">Our Approach</span>
+                <span class="nav-link" onclick="app.switchView('impact')">Impact</span>
+                <span class="nav-link" onclick="app.switchView('about')">About / Contact</span>
+                <span class="btn-nav btn nav-link" onclick="app.switchView('submit')">Submit a Lead</span>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding-top: 40px; padding-bottom: 60px;">
+
+        <div id="home-view" class="site-view active-view">
+            <section class="hero">
+                <div class="container">
+                    <h1>Protecting Vulnerable Adults and Taxpayer Dollars</h1>
+                    <p class="subheadline">The Silver Lead Project reviews community-submitted concerns involving vulnerable adults, licensed care providers, fraud, neglect, exploitation, unsafe practices, billing concerns, retaliation, and misuse of taxpayer-funded care programs.</p>
+                    <div class="hero-actions">
+                        <button class="btn btn-white" onclick="app.switchView('submit')">Submit a Lead</button>
+                        <button class="btn btn-outline" onclick="app.switchView('works')">Learn How It Works</button>
+                    </div>
+                    <div>
+                        <p class="hero-tagline">Community leads. Evidence built. Accountability delivered.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-padding">
+                <div class="section-header">
+                    <h2>What The Silver Lead Project Does</h2>
+                </div>
+                <div class="section-copy">
+                    <p style="margin-bottom: 20px;">The Silver Lead Project receives leads from people close to the care system, including clients, families, staff, former staff, advocates, whistleblowers, and community members.</p>
+                    <p style="margin-bottom: 20px;">When a concern is submitted, the project reviews the issue, gathers additional information when needed, works with the person who submitted the lead, organizes supporting documents, identifies patterns, and works toward a reasoned conclusion.</p>
+                    <p>When concerns appear credible and actionable, The Silver Lead Project may refer organized information to appropriate oversight, licensing, investigative, prosecutorial, media, or public accountability channels.</p>
+                </div>
+            </section>
+
+            <section class="section-padding bg-white" style="border-radius: 6px;">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Leads Come From the Community</h2>
+                    </div>
+                    <div class="grid grid-4" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 40px;">
+                        <div class="card"><h3>Clients</h3><p>Individuals actively or previously receiving long-term support and care services.</p></div>
+                        <div class="card"><h3>Families</h3><p>Relatives and legal guardians observing direct operational conditions.</p></div>
+                        <div class="card"><h3>
