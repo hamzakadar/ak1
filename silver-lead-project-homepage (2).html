@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Silver Lead Project — Community Leads. Evidence Built. Accountability Delivered.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1F3A;
+    --silver:#C0C7D1;
+    --blue:#2F5F8F;
+    --offwhite:#F7F8FA;
+    --white:#FFFFFF;
+    --charcoal:#1F2933;
+    --muted:#5B6775;
+    --green:#2E7D5B;
+    --red:#B42318;
+    --serif:'Merriweather', Georgia, serif;
+    --sans:'Inter', -apple-system, sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--sans);color:var(--charcoal);background:var(--offwhite);line-height:1.65;}
+  h1,h2,h3{font-family:var(--serif);color:var(--navy);line-height:1.25;}
+  a{color:var(--blue);text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
+  .eyebrow{
+    font-family:var(--sans);
+    font-size:.75rem;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--blue);
+  }
+  .eyebrow.on-navy{color:var(--silver);}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:14px 26px;border-radius:2px;
+    font-weight:600;font-size:.95rem;
+    border:1px solid transparent;cursor:pointer;
+    transition:transform .15s ease, background .2s ease, border-color .2s ease;
+  }
+  .btn-primary{background:var(--white);color:var(--navy);}
+  .btn-primary:hover{transform:translateY(-1px);}
+  .btn-outline{background:transparent;color:var(--white);border-color:rgba(255,255,255,.45);}
+  .btn-outline:hover{border-color:var(--white);}
+  .btn-solid-navy{background:var(--navy);color:var(--white);}
+  .btn-solid-navy:hover{background:#0f2a4d;}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:var(--navy);
+    border-bottom:1px solid rgba(192,199,209,.18);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;max-width:1120px;margin:0 auto;}
+  .brand{display:flex;align-items:center;gap:12px;color:var(--white);font-family:var(--serif);font-weight:700;font-size:1.05rem;}
+  .brand .mark{width:30px;height:30px;flex-shrink:0;}
+  .navlinks{display:flex;gap:26px;align-items:center;}
+  .navlinks a{color:var(--silver);font-size:.88rem;font-weight:500;}
+  .navlinks a:hover{color:var(--white);}
+  .navlinks .btn{padding:10px 18px;font-size:.85rem;}
+  .nav-toggle{display:none;background:none;border:none;color:var(--white);font-size:1.4rem;cursor:pointer;}
+
+  @media (max-width:860px){
+    .navlinks{position:absolute;top:100%;left:0;right:0;background:var(--navy);flex-direction:column;align-items:flex-start;padding:10px 28px 22px;gap:14px;display:none;border-bottom:1px solid rgba(192,199,209,.18);}
+    .navlinks.open{display:flex;}
+    .nav-toggle{display:block;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    background:linear-gradient(180deg,var(--navy) 0%, #0d2445 100%);
+    color:var(--white);
+    padding:88px 0 96px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero .wrap{position:relative;z-index:2;}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;}
+  .hero h1{color:var(--white);font-size:clamp(2.1rem,4vw,3.1rem);font-weight:900;margin:14px 0 20px;letter-spacing:-.01em;}
+  .hero p.sub{color:#D8DEE7;font-size:1.08rem;max-width:56ch;margin-bottom:34px;}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:30px;}
+  .hero-tagline{color:var(--silver);font-size:.9rem;font-style:italic;font-family:var(--serif);}
+  .hero-graphic{position:relative;}
+  @media (max-width:860px){.hero-grid{grid-template-columns:1fr;} .hero-graphic{order:-1;height:220px;}}
+
+  /* ---------- sections generic ---------- */
+  section{padding:88px 0;}
+  .section-head{max-width:640px;margin:0 0 48px;}
+  .section-head h2{font-size:clamp(1.6rem,2.6vw,2.1rem);margin-top:10px;}
+  .divider{height:1px;background:var(--silver);opacity:.5;width:64px;margin:18px 0;}
+  .band-white{background:var(--white);}
+  .band-navy{background:var(--navy);color:var(--white);}
+  .band-navy h2{color:var(--white);}
+  .band-navy .muted{color:#C7CEDA;}
+  .muted{color:var(--muted);}
+
+  /* what we do */
+  .do-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
+  .do-grid p{margin-bottom:16px;color:var(--charcoal);}
+  .do-callout{
+    background:var(--white);border-left:3px solid var(--green);
+    padding:22px 26px;border-radius:2px;
+    font-size:.96rem;color:var(--charcoal);
+    box-shadow:0 1px 3px rgba(11,31,58,.06);
+  }
+  .do-callout strong{color:var(--green);}
+  @media (max-width:860px){.do-grid{grid-template-columns:1fr;}}
+
+  /* community cards */
+  .card-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .card{
+    background:var(--white);padding:24px 20px;border-radius:3px;
+    border:1px solid #E4E8ED;text-align:left;
+  }
+  .card .dot{width:8px;height:8px;border-radius:50%;background:var(--blue);margin-bottom:14px;}
+  .card h3{font-family:var(--sans);font-size:.98rem;font-weight:700;color:var(--navy);margin-bottom:4px;}
+  @media (max-width:860px){.card-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:520px){.card-grid{grid-template-columns:1fr;}}
+
+  /* what we review */
+  .review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid #E4E8ED;border-radius:3px;overflow:hidden;background:var(--white);}
+  .review-item{padding:16px 20px;border-bottom:1px solid #EEF1F4;border-right:1px solid #EEF1F4;font-size:.92rem;display:flex;gap:10px;align-items:flex-start;}
+  .review-item svg{flex-shrink:0;margin-top:3px;}
+  @media (max-width:860px){.review-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.review-grid{grid-template-columns:1fr;}}
+
+  /* timeline */
+  .timeline{position:relative;padding-left:0;margin-top:20px;}
+  .tl-line{position:absolute;left:19px;top:10px;bottom:10px;width:2px;background:linear-gradient(180deg,var(--silver) 0%, var(--green) 100%);}
+  .tl-item{position:relative;padding:0 0 44px 62px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-dot{
+    position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;
+    background:var(--white);border:2px solid var(--blue);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-weight:700;color:var(--blue);
+  }
+  .tl-item:last-child .tl-dot{border-color:var(--green);color:var(--green);background:#EAF4EF;}
+  .tl-item h3{font-size:1.08rem;margin-bottom:6px;}
+  .tl-item p{color:var(--charcoal);font-size:.96rem;max-width:60ch;}
+
+  /* provider response / independent review two-col */
+  .split{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start;}
+  @media (max-width:860px){.split{grid-template-columns:1fr;}}
+  .tag-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;}
+  .tag{
+    background:var(--offwhite);border:1px solid #E4E8ED;color:var(--charcoal);
+    font-size:.82rem;padding:8px 14px;border-radius:20px;
+  }
+  .band-white .tag{background:#F1F4F7;}
+  .note-box{
+    background:var(--offwhite);border:1px solid #E4E8ED;
+    padding:20px 22px;border-radius:3px;font-size:.9rem;color:var(--muted);
+    margin-top:22px;
+  }
+
+  /* qualified companies */
+  .qc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:10px;}
+  .qc-item{background:var(--white);border:1px solid #E4E8ED;padding:20px;border-radius:3px;font-size:.92rem;}
+  @media (max-width:860px){.qc-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.qc-grid{grid-template-columns:1fr;}}
+  .coi-note{
+    margin-top:28px;border:1px solid var(--green);background:#F0F7F3;
+    padding:18px 22px;border-radius:3px;font-size:.9rem;color:#1E4E39;
+  }
+  .coi-note strong{color:var(--green);}
+
+  /* accountability with care */
+  .care-wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+  @media (max-width:860px){.care-wrap{grid-template-columns:1fr;}}
+  .care-wrap ul{margin-top:6px;padding-left:20px;color:var(--charcoal);}
+  .care-wrap li{margin-bottom:8px;}
+
+  /* impact */
+  .impact{background:var(--navy);color:var(--white);}
+  .impact-outcomes{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;}
+  .impact-outcomes span{
+    border:1px solid rgba(192,199,209,.4);color:var(--silver);
+    padding:8px 16px;border-radius:20px;font-size:.82rem;
+  }
+
+  /* final CTA */
+  .cta-final{
+    background:var(--white);text-align:center;
+    padding:96px 0;
+  }
+  .cta-final h2{font-size:clamp(1.7rem,3vw,2.3rem);}
+  .cta-final p{max-width:56ch;margin:16px auto 30px;color:var(--muted);}
+  .emergency-strip{
+    display:inline-flex;align-items:center;gap:10px;
+    border:1px solid var(--red);color:var(--red);
+    padding:12px 20px;border-radius:3px;font-size:.88rem;font-weight:600;margin-top:26px;
+  }
+
+  /* footer */
+  footer{background:var(--navy);color:#B9C2CE;padding:56px 0 34px;font-size:.86rem;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;padding-bottom:36px;border-bottom:1px solid rgba(192,199,209,.18);}
+  .footer-grid h4{color:var(--white);font-family:var(--sans);font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;}
+  .footer-grid a{color:#B9C2CE;display:block;margin-bottom:9px;}
+  .footer-grid a:hover{color:var(--white);}
+  .footer-brand{font-family:var(--serif);color:var(--white);font-size:1.05rem;margin-bottom:12px;}
+  .footer-disclaimer{padding-top:26px;color:#8D97A6;line-height:1.7;font-size:.82rem;}
+  @media (max-width:760px){.footer-grid{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 30 30" fill="none">
+        <circle cx="6" cy="24" r="2.6" fill="#C0C7D1"/>
+        <circle cx="15" cy="15" r="2.6" fill="#C0C7D1"/>
+        <circle cx="24" cy="7" r="3.2" fill="#F7F8FA"/>
+        <path d="M8 22 L13 17 M17 13 L21 9" stroke="#C0C7D1" stroke-width="1.4"/>
+      </svg>
+      The Silver Lead Project
+    </div>
+    <button class="nav-toggle" onclick="document.getElementById('navlinks').classList.toggle('open')">&#9776;</button>
+    <nav class="navlinks" id="navlinks">
+      <a href="#what-we-review">What We Review</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#provider-response">Provider Response</a>
+      <a href="#approach">Our Approach</a>
+      <a href="#about">About</a>
+      <a href="tel:+17633060921" class="btn btn-solid-navy">Call (763) 306-0921</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow on-navy">Community Accountability &amp; Evidence Review</div>
+      <h1>Protecting Vulnerable Adults and Taxpayer Dollars</h1>
+      <p class="sub">The Silver Lead Project reviews community-submitted concerns involving vulnerable adults, licensed care providers, fraud, neglect, exploitation, unsafe practices, billing concerns, retaliation, and misuse of taxpayer-funded care programs.</p>
+      <div class="hero-actions">
+        <a href="tel:+17633060921" class="btn btn-primary">Call (763) 306-0921</a>
+        <a href="#how-it-works" class="btn btn-outline">Learn How It Works</a>
+      </div>
+      <div class="hero-tagline">"Community leads. Evidence built. Accountability delivered."</div>
+    </div>
+    <div class="hero-graphic">
+      <svg viewBox="0 0 360 300" width="100%" height="300">
+        <circle cx="40" cy="240" r="4" fill="#5B6775"/>
+        <circle cx="90" cy="200" r="4" fill="#5B6775"/>
+        <circle cx="60" cy="150" r="4" fill="#5B6775"/>
+        <circle cx="120" cy="120" r="4" fill="#5B6775"/>
+        <circle cx="170" cy="170" r="4" fill="#5B6775"/>
+        <circle cx="200" cy="90" r="5" fill="#C0C7D1"/>
+        <circle cx="260" cy="60" r="6" fill="#F7F8FA"/>
+        <path d="M40 240 L90 200 L60 150 L120 120 L170 170 L200 90 L260 60"
+              stroke="#C0C7D1" stroke-width="1.4" fill="none" stroke-dasharray="4 4" opacity=".7"/>
+        <circle cx="260" cy="60" r="12" fill="none" stroke="#2E7D5B" stroke-width="1.4"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="band-white">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Overview</div>
+      <h2>What The Silver Lead Project Does</h2>
+    </div>
+    <div class="do-grid">
+      <div>
+        <p>The Silver Lead Project receives leads from people close to the care system, including clients, families, staff, former staff, advocates, whistleblowers, and community members.</p>
+        <p>When a concern is submitted, the project reviews the issue, gathers additional information when needed, works with the person who submitted the lead, organizes supporting documents, identifies patterns, and works toward a reasoned conclusion.</p>
+      </div>
+      <div class="do-callout">
+        <strong>When appropriate:</strong> when concerns appear serious and credible, The Silver Lead Project may provide a limited opportunity for the provider to submit independent review findings from a qualified company before a final referral decision is made.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADS FROM COMMUNITY -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Where Leads Come From</div>
+      <h2>Leads Come From the Community</h2>
+      <div class="divider"></div>
+      <p class="muted">People closest to the care system often see warning signs first. If someone witnessed unsafe care, noticed a pattern, reviewed concerning records, experienced retaliation, or identified possible fraud or misuse of public funds, their information may help protect vulnerable adults and support accountability.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card"><div class="dot"></div><h3>Clients Receiving Services</h3></div>
+      <div class="card"><div class="dot"></div><h3>Families of Clients</h3></div>
+      <div class="card"><div class="dot"></div><h3>Staff Members</h3></div>
+      <div class="card"><div class="dot"></div><h3>Former Staff Members</h3></div>
+      <div class="card"><div class="dot"></div><h3>Advocates</h3></div>
+      <div class="card"><div class="dot"></div><h3>Whistleblowers</h3></div>
+      <div class="card"><div class="dot"></div><h3>Community Members</h3></div>
+      <div class="card"><div class="dot"></div><h3>Concerned Citizens</h3></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE REVIEW -->
+<section class="band-white" id="what-we-review">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Scope</div>
+      <h2>Concerns We Review</h2>
+    </div>
+    <div class="review-grid">
+      <div class="review-item">▪ Vulnerable adult abuse</div>
+      <div class="review-item">▪ Vulnerable adult neglect</div>
+      <div class="review-item">▪ Financial exploitation</div>
+      <div class="review-item">▪ Unsafe care practices</div>
+      <div class="review-item">▪ Provider misconduct</div>
+      <div class="review-item">▪ Billing concerns</div>
+      <div class="review-item">▪ Fraud, waste, or abuse</div>
+      <div class="review-item">▪ Misuse of public funds</div>
+      <div class="review-item">▪ Retaliation</div>
+      <div class="review-item">▪ Falsified records</div>
+      <div class="review-item">▪ Falsified billing</div>
+      <div class="review-item">▪ Failure to provide services</div>
+      <div class="review-item">▪ Suspicious claims</div>
+      <div class="review-item">▪ Repeated complaints</div>
+      <div class="review-item">▪ Licensing concerns</div>
+      <div class="review-item">▪ Improper ownership/management</div>
+      <div class="review-item">▪ Staffing concerns affecting safety</div>
+      <div class="review-item">▪ Weak financial controls</div>
+      <div class="review-item">▪ Documentation failures</div>
+      <div class="review-item">▪ Operational breakdowns</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Process</div>
+      <h2>How the Process Works</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-line"></div>
+      <div class="tl-item">
+        <div class="tl-dot">1</div>
+        <h3>Call to Report a Concern</h3>
+        <p>A client, family member, staff member, former staff member, advocate, whistleblower, or community member calls (763) 306-0921 to report a concern.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">2</div>
+        <h3>Initial Review</h3>
+        <p>The Silver Lead Project reviews the concern to understand the provider involved, the possible risk to vulnerable adults, and whether taxpayer-funded services may be involved.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">3</div>
+        <h3>Research and Documentation</h3>
+        <p>The project may gather more information, review available documents, organize records, create timelines, and identify patterns.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">4</div>
+        <h3>Limited Provider Notice When Appropriate</h3>
+        <p>When enough credible concern exists, and when safe and appropriate, the provider may receive formal notice and a limited opportunity to submit independent review findings from a qualified company before a final referral decision is made.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">5</div>
+        <h3>Independent Review Findings Only</h3>
+        <p>The Silver Lead Project considers independent review findings from qualified companies as provider response materials.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">6</div>
+        <h3>Final Review Decision</h3>
+        <p>After reviewing the available information and any independent review findings submitted, The Silver Lead Project determines whether to close the matter, continue review, request more information, recognize remediation, or refer credible unresolved concerns to appropriate accountability channels.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROVIDER RESPONSE PROCESS -->
+<section class="band-white" id="provider-response">
+  <div class="wrap split">
+    <div>
+      <div class="eyebrow">For Providers</div>
+      <h2>Provider Response Process</h2>
+      <div class="divider"></div>
+      <p>The Silver Lead Project believes serious concerns should be reviewed carefully. When appropriate and safe, a provider may be given a limited opportunity to submit independent review findings before a final referral decision is made.</p>
+      <p style="margin-top:14px;">Only independent review findings from qualified companies are considered as provider response materials.</p>
+    </div>
+    <div>
+      <p class="eyebrow" style="margin-bottom:14px;">Independent review findings may address</p>
+      <div class="tag-list">
+        <span class="tag">Compliance concerns</span>
+        <span class="tag">Billing concerns</span>
+        <span class="tag">Documentation concerns</span>
+        <span class="tag">Financial controls</span>
+        <span class="tag">Staff accountability</span>
+        <span class="tag">Operational systems</span>
+        <span class="tag">Corrective action</span>
+        <span class="tag">Functional oversight needs</span>
+        <span class="tag">Provider stabilization</span>
+        <span class="tag">Future-risk prevention</span>
+      </div>
+      <div class="note-box">This process is a review opportunity, not a legal proceeding. Providers retain the right to also report to, or seek guidance from, their own legal counsel and applicable regulatory bodies at any time.</div>
+    </div>
+  </div>
+</section>
+
+<!-- INDEPENDENT REVIEW FINDINGS -->
+<section>
+  <div class="wrap split">
+    <div>
+      <div class="eyebrow">Verification</div>
+      <h2>Independent Review Findings</h2>
+      <div class="divider"></div>
+      <p>In some cases, serious remediation requires more than a written explanation. The Silver Lead Project considers independent review findings from qualified companies that can assess whether the provider has corrected or is actively correcting the concerns identified.</p>
+    </div>
+    <div>
+      <p class="eyebrow" style="margin-bottom:14px;">Independent review may involve</p>
+      <div class="tag-list">
+        <span class="tag">Compliance review</span>
+        <span class="tag">Billing review</span>
+        <span class="tag">Documentation review</span>
+        <span class="tag">Financial controls review</span>
+        <span class="tag">Operational review</span>
+        <span class="tag">Staff accountability review</span>
+        <span class="tag">Care delivery systems review</span>
+        <span class="tag">Internal policy review</span>
+        <span class="tag">Functional oversight review</span>
+        <span class="tag">Provider stabilization review</span>
+      </div>
+      <p class="muted" style="margin-top:20px;font-size:.92rem;">The Silver Lead Project may identify qualified independent review company options. Providers may also propose another qualified company for consideration.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUALIFIED REVIEW COMPANY OPTIONS -->
+<section class="band-white">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Options</div>
+      <h2>Qualified Review Company Options</h2>
+      <div class="divider"></div>
+      <p class="muted">When independent review is appropriate, The Silver Lead Project may provide a list of qualified companies that can perform review or remediation-related work. These companies may include organizations with experience in:</p>
+    </div>
+    <div class="qc-grid">
+      <div class="qc-item">Healthcare operations</div>
+      <div class="qc-item">Provider compliance</div>
+      <div class="qc-item">Billing and revenue systems</div>
+      <div class="qc-item">Documentation review</div>
+      <div class="qc-item">Staff accountability</div>
+      <div class="qc-item">Financial controls</div>
+      <div class="qc-item">Corrective action verification</div>
+      <div class="qc-item">Functional oversight</div>
+      <div class="qc-item">Provider stabilization</div>
+    </div>
+    <p class="muted" style="margin-top:22px;font-size:.92rem;">Providers may choose from the listed qualified companies or propose another qualified company for consideration.</p>
+    <div class="coi-note">
+      <strong>Disclosure:</strong> The Silver Lead Project receives no fee, commission, or referral compensation from any independent review company. Providers are free to select any qualified company of their choosing, subject to review of qualifications.
+    </div>
+  </div>
+</section>
+
+<!-- ACCOUNTABILITY WITH CARE -->
+<section id="approach">
+  <div class="wrap care-wrap">
+    <div>
+      <div class="eyebrow">Our Approach</div>
+      <h2>Accountability With Care</h2>
+      <div class="divider"></div>
+      <p>The Silver Lead Project believes accountability must be strong, but careful. Serious concerns should not be ignored. At the same time, providers should not be judged based on rumors, incomplete information, or unsupported claims.</p>
+    </div>
+    <div>
+      <p>When appropriate and safe, the project reviews available information, works with the referring person, identifies patterns, gives the provider a limited opportunity to submit independent review findings, and determines whether further action is warranted.</p>
+      <ul>
+        <li>Protect vulnerable adults</li>
+        <li>Safeguard taxpayer dollars</li>
+        <li>Respect due process</li>
+        <li>Preserve needed services when possible</li>
+        <li>Hold bad actors accountable when concerns are serious, credible, and unresolved</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section class="impact">
+  <div class="wrap">
+    <div class="eyebrow on-navy">Impact</div>
+    <h2 style="max-width:640px;">Real Accountability Starts With Evidence</h2>
+    <p class="muted" style="max-width:64ch;margin-top:16px;">The Silver Lead Project helps turn scattered community concerns into organized, evidence-supported accountability review. Documentation submitted through this work may contribute to accountability outcomes involving:</p>
+    <div class="impact-outcomes">
+      <span>Provider scrutiny</span>
+      <span>Stronger oversight attention</span>
+      <span>Corrective action</span>
+      <span>Provider closures</span>
+      <span>Owner exclusions</span>
+      <span>Government agency review</span>
+      <span>Court proceedings</span>
+      <span>Regulatory action</span>
+      <span>Media coverage</span>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-final" id="submit">
+  <div class="wrap">
+    <div class="eyebrow">Take Action</div>
+    <h2>Have a Concern? Call to Report It.</h2>
+    <p>If you have information about vulnerable adult abuse, neglect, exploitation, unsafe care, provider misconduct, fraud, billing concerns, retaliation, or misuse of taxpayer-funded care services, call (763) 306-0921 to submit a lead for review.</p>
+    <a href="tel:+17633060921" class="btn btn-solid-navy">Call (763) 306-0921</a>
+    <div><span class="emergency-strip">⚠ This line is not for emergencies. If someone is in immediate danger, call 911.</span></div>
+  </div>
+</section>
+
+<footer id="about">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">The Silver Lead Project</div>
+        <p style="max-width:40ch;">A community-powered accountability program protecting vulnerable adults and safeguarding taxpayer-funded care programs.</p>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <a href="#what-we-review">What We Review</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#provider-response">Provider Response Process</a>
+        <a href="#approach">Our Approach</a>
+        <a href="tel:+17633060921">Call (763) 306-0921</a>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms / Disclaimer</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      The Silver Lead Project is an independent accountability program. If someone is in immediate danger, call 911.
+      Submitting information to The Silver Lead Project does not replace official reporting to state, county, law enforcement, licensing, regulatory, or protective services agencies. The Silver Lead Project cannot guarantee investigation, enforcement action, prosecution, licensing action, media coverage, provider closure, remediation, or any specific outcome.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
